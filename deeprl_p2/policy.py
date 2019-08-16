@@ -13,12 +13,9 @@ class Policy:
 
     Policies are used by the agent to choose actions.
 
-    Policies are designed to be stacked to get interesting behaviors
-    of choices. For instances in a discrete action space the lowest
-    level policy may take in Q-Values and select the action index
-    corresponding to the largest value. If this policy is wrapped in
-    an epsilon greedy policy then with some probability epsilon, a
-    random action will be chosen.
+    Policies are designed to be stacked to get interesting behaviors of choices.
+    For instances in a discrete action space the lowest level policy may take in Q-Values and select the action index corresponding to the largest value.
+    If this policy is wrapped in an epsilon greedy policy then with some probability epsilon, a random action will be chosen.
     """
 
     def select_action(self, **kwargs):
@@ -82,14 +79,12 @@ class GreedyPolicy(Policy):
 class GreedyEpsilonPolicy(Policy):
     """Selects greedy action or with some probability a random action.
 
-    Standard greedy-epsilon implementation. With probability epsilon
-    choose a random action. Otherwise choose the greedy action.
+    Standard greedy-epsilon implementation. With probability epsilon choose a random action. Otherwise choose the greedy action.
 
     Parameters
     ----------
     epsilon: float
-     Initial probability of choosing a random action. Can be changed
-     over time.
+     Initial probability of choosing a random action. Can be changed over time.
     """
     def __init__(self, num_actions, epsilon=0.05):
         assert num_actions >= 1
@@ -102,8 +97,7 @@ class GreedyEpsilonPolicy(Policy):
         Parameters
         ----------
         q_values: array-like
-          Array-like structure of floats representing the Q-values for
-          each action.
+          Array-like structure of floats representing the Q-values for each action.
 
         Returns
         -------

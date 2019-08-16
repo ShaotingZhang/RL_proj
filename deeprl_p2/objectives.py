@@ -7,8 +7,6 @@ import semver
 def huber_loss(y_true, y_pred, max_grad=1.):
     """Calculate the huber loss.
 
-    See https://en.wikipedia.org/wiki/Huber_loss
-
     Parameters
     ----------
     y_true: np.array, tf.Tensor
@@ -33,8 +31,7 @@ def huber_loss(y_true, y_pred, max_grad=1.):
 def mean_huber_loss(y_true, y_pred, max_grad=1.):
     """Return mean huber loss.
 
-    Same as huber_loss, but takes the mean over all values in the
-    output tensor.
+    Same as huber_loss, but takes the mean over all values in the output tensor.
 
     Parameters
     ----------

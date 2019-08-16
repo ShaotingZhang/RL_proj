@@ -10,38 +10,26 @@ from PIL import Image
 class DQNAgent:
 	"""Class implementing DQN.
 
-	This is a basic outline of the functions/parameters you will need
-	in order to implement the DQNAgnet. This is just to get you
-	started. You may need to tweak the parameters, add new ones, etc.
+	This is a basic outline of the functions/parameters you will need in order to implement the DQNAgnet. This is just to get you started. You may need to tweak the parameters, add new ones, etc.
 
-	Feel free to change the functions and funciton parameters that the
-	class provides.
-
-	We have provided docstrings to go along with our suggested API.
+	Feel free to change the functions and funciton parameters that the class provides.
 
 	Parameters
 	----------
 	q_network: keras.models.Model
-	  Your Q-network model.
+	  We choose Q-network model.
 	preprocessor: deeprl_p2.core.Preprocessor
-	  The preprocessor class. See the associated classes for more
-	  details.
+	  The preprocessor class. See the associated classes for more detail.
 	memory: deeprl_p2.core.Memory
-	  Your replay memory.
+	  Our replay memory.
 	gamma: float
 	  Discount factor.
 	target_update_freq: float
-	  Frequency to update the target network. You can either provide a
-	  number representing a soft target update (see utils.py) or a
-	  hard target update (see utils.py and Atari paper.)
+	  Frequency to update the target network. We can either provide a number representing a soft target update (see utils.py) or a hard target update (see utils.py and Atari paper.)
 	num_burn_in: int
-	  Before you begin updating the Q-network your replay memory has
-	  to be filled up with some number of samples. This number says
-	  how many.
+	  Before we begin updating the Q-network, our replay memory has to be filled up with some number of samples. This number says how many.
 	train_freq: int
-	  How often you actually update your Q-Network. Sometimes
-	  stability is improved if you collect a couple samples for your
-	  replay memory, for every Q-network update that you run.
+	  How often you actually update your Q-Network. Sometimes stability is improved if you collect a couple samples for your replay memory, for every Q-network update that you run.
 	batch_size: int
 	  How many samples in each minibatch.
 	"""
@@ -83,19 +71,13 @@ class DQNAgent:
 	def compile(self, optimizer, loss_func):
 		"""Setup all of the TF graph variables/ops.
 
-		This is inspired by the compile method on the
-		keras.models.Model class.
+		This is inspired by the compile method on the keras.models.Model class.
 
-		This is a good place to create the target network, setup your
-		loss function and any placeholders you might need.
+		This is a good place to create the target network, setup our loss function and any placeholders we might need.
 
-		You should use the mean_huber_loss function as your
-		loss_function. You can also experiment with MSE and other
-		losses.
+		We should use the mean_huber_loss function as our loss_function.
 
-		The optimizer can be whatever class you want. We used the
-		keras.optimizers.Optimizer class. Specifically the Adam
-		optimizer.
+		The optimizer can be whatever class we want. We used the keras.optimizers.Optimizer class.
 		"""
 		self.q_network.compile(optimizer=optimizer, loss=loss_func)
 		self.target_network.compile(optimizer=optimizer, loss=loss_func)
@@ -125,19 +107,13 @@ class DQNAgent:
 	def select_action(self, state, **kwargs):
 		"""Select the action based on the current state.
 
-		You will probably want to vary your behavior here based on
-		which stage of training your in. For example, if you're still
-		collecting random samples you might want to use a
-		UniformRandomPolicy.
+		We will probably want to vary our behavior here based on which stage of training your in. For example, if we're still collecting random samples you might want to use a UniformRandomPolicy.
 
-		If you're testing, you might want to use a GreedyEpsilonPolicy
-		with a low epsilon.
+		If we're testing, we might want to use a GreedyEpsilonPolicy with a low epsilon.
 
-		If you're training, you might want to use the
-		LinearDecayGreedyEpsilonPolicy.
+		If we're training, we might want to use the LinearDecayGreedyEpsilonPolicy.
 
-		This would also be a good place to call
-		process_state_for_network in your preprocessor.
+		This would also be a good place to call process_state_for_network in our preprocessor.
 
 		Returns
 		--------
@@ -152,17 +128,11 @@ class DQNAgent:
 	def update_predict_network(self):
 		"""Update your predict network.
 
-		Behavior may differ based on what stage of training your
-		in. If you're in training mode then you should check if you
-		should update your network parameters based on the current
-		step and the value you set for train_freq.
+		Behavior may differ based on what stage of training your in. If you're in training mode then you should check if you should update your network parameters based on the current step and the value you set for train_freq.
 
-		Inside, you'll want to sample a minibatch, calculate the
-		target values, update your network, and then update your
-		target values.
+		Inside, you'll want to sample a minibatch, calculate the target values, update your network, and then update your target values.
 
-		You might want to return the loss and other metrics as an
-		output. They can help you monitor how training is going.
+		We might want to return the loss and other metrics as an output. They can help us monitor how training is going.
 		"""
 		states, actions, rewards, new_states, is_terminals = self.memory.sample(self.batch_size)
 
